@@ -1,0 +1,11 @@
+version: "2"
+
+linters:
+  default: all
+  disable:
+    - depguard
+    - godox
+    - exhaustruct
+    - tagliatelle
+    - gochecknoinits
+    - gochecknoglobals
