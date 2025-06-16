@@ -16,7 +16,7 @@ builds:
       - darwin
 
 archives:
-  - formats: [tar.gz]
+  - formats: binary
     name_template: >-
       {{ .ProjectName }}_
       {{- title .Os }}_
