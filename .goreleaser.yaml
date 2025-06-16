@@ -18,7 +18,7 @@ archives:
   - formats: binary
     name_template: >-
       {{ .ProjectName }}_v{{ .Version }}_
-      {{- .Os | toLower }}-
+      {{- tolower .Os }}-
       {{- if eq .Arch "amd64" }}x86_64
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
