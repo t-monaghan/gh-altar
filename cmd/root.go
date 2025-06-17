@@ -6,6 +6,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// BrokerAddress is the address of the altar broker being targeted by gh-altar.
+var BrokerAddress string
+
+// GithubToken is an optional token for providing authorisation to queries.
+var GithubToken string
+
 // rootCmd represents the base command when called without any subcommands.
 var rootCmd = &cobra.Command{
 	Use:   "gh-altar",
@@ -33,4 +39,7 @@ func init() {
 	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.gh-altar.yaml)")
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
+	rootCmd.PersistentFlags().StringVarP(&BrokerAddress, "broker-address",
+		"a", "http://127.0.0.1:25827", "IP Address of your altar broker admin server")
+	rootCmd.PersistentFlags().StringVar(&GithubToken, "token", "", "github auth token")
 }

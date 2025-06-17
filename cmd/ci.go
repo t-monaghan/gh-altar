@@ -16,14 +16,10 @@ import (
 	"github.com/t-monaghan/altar/examples/pipelinewatcher"
 )
 
-var brokerAddress string
-
 const loopDelay = time.Second * 5
 
 func init() {
 	rootCmd.AddCommand(ciCmd)
-	ciCmd.Flags().StringVarP(&brokerAddress, "broker-address",
-		"a", "http://127.0.0.1:25827/api/pipeline-watcher", "IP Address of your altar broker admin server")
 }
 
 var ciCmd = &cobra.Command{
@@ -76,7 +72,8 @@ func sendRequest(status pipelinewatcher.PullRequestActionsStatus) error {
 	bufferedJSON := bytes.NewBuffer(jsonData)
 
 	client := &http.Client{}
-	req, err := http.NewRequestWithContext(context.Background(), http.MethodPost, brokerAddress, bufferedJSON)
+	req, err := http.NewRequestWithContext(context.Background(),
+		http.MethodPost, BrokerAddress+"/api/pipeline-watcher", bufferedJSON)
 
 	if err != nil {
 		return fmt.Errorf("failed to marshal github pr status into json: %w", err)
