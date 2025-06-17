@@ -3,8 +3,10 @@
 
 # Summary
 
-gh-altar is a GitHub cli extension to be used with [altar](https://github.com/t-monaghan/altar) to display GitHub information on Awtrix powered displays.
+gh-altar is a GitHub cli extension to be used with [altar](https://github.com/t-monaghan/altar) to display GitHub information on Awtrix powered displays, specifically the examples defined [here](https://github.com/t-monaghan/altar/tree/main/examples/github).
 
 # Usage
 
-`gh altar watch-ci` will query the GitHub cli for the checks running on the pull request and display information on the Awtrix display when using the example GitHub notifier in the altar project.
+
+
+Running `gh altar` and any sub-commands with the `--help` flag will provide the documentation for all commands and flags available.
