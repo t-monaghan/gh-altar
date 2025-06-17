@@ -25,7 +25,7 @@ func init() {
 var ciCmd = &cobra.Command{
 	Use:     "watch-ci",
 	Short:   "watches the required checks for the given working directory's PR and sends the action information to altar",
-	Aliases: []string{"ci"},
+	Aliases: []string{"ci", "checks"},
 	Run:     ci,
 }
 
