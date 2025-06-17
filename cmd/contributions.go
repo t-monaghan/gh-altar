@@ -7,7 +7,9 @@ import (
 	"fmt"
 	"log/slog"
 	"net/http"
+	"strings"
 
+	"github.com/cli/go-gh/v2"
 	"github.com/cli/go-gh/v2/pkg/api"
 	"github.com/shurcooL/graphql"
 	"github.com/spf13/cobra"
@@ -56,9 +58,15 @@ func grid(_ *cobra.Command, _ []string) {
 		return
 	}
 
+	userName, stderr, err := gh.Exec("api", "user", "--jq", ".login")
+	if err != nil {
+		slog.Error("failed to query github cli for current user", "error", stderr.String())
+
+		return
+	}
+
 	variables := map[string]any{
-		// TODO have this detect username with github api call to user
-		"userName": graphql.String("t-monaghan"),
+		"userName": graphql.String(strings.TrimSpace(userName.String())),
 	}
 
 	var query graphQlQuery
