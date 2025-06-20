@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/t-monaghan/gh-altar/compare/v1.1.1...v1.2.0) (2025-06-20)
+
+
+### Features
+
+* adds version flag ([#14](https://github.com/t-monaghan/gh-altar/issues/14)) ([8402ea4](https://github.com/t-monaghan/gh-altar/commit/8402ea41efcccf9fdfe466f3b9950b0a35f1d962))
+* allows setting altar broker IP address from configuration file ([#12](https://github.com/t-monaghan/gh-altar/issues/12)) ([611688e](https://github.com/t-monaghan/gh-altar/commit/611688ed2fc797daffe7fbb91320a2992782cc0f))
+
+
+### Bug Fixes
+
+* brings github token flag back ([8402ea4](https://github.com/t-monaghan/gh-altar/commit/8402ea41efcccf9fdfe466f3b9950b0a35f1d962))
+
 ## [1.1.1](https://github.com/t-monaghan/gh-altar/compare/v1.1.0...v1.1.1) (2025-06-17)
 
 
