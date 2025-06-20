@@ -9,6 +9,10 @@ import (
 	"github.com/spf13/viper"
 )
 
+var (
+	version = "development"
+)
+
 // GithubToken is an optional token for providing authorisation to queries.
 var GithubToken string
 
@@ -18,6 +22,7 @@ var rootCmd = &cobra.Command{
 	Short: "a github cli extension for usage with altar brokers",
 	Long: `gh-altar is a tool for pushing github related information to your awtrix device via an altar broker.
 e.g. "gh altar ci" will watch the actions for the PR on the branch you are currently cd'd into.`,
+	Version: version,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
@@ -57,4 +62,6 @@ func initConfig() {
 	if a := viper.GetString("broker.address"); a == "" {
 		slog.Error("could not find configured value for the altar broker address")
 	}
+
+	rootCmd.PersistentFlags().StringVar(&GithubToken, "token", "", "github auth token")
 }

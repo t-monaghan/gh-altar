@@ -13,6 +13,8 @@ builds:
     goos:
       - linux
       - darwin
+    ldflags:
+      - "-X cmd.version={{.Version}}"
 
 archives:
   - formats: binary
