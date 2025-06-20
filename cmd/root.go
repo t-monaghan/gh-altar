@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"log/slog"
 	"os"
 	"path/filepath"
@@ -40,7 +39,7 @@ func init() {
 func initConfig() {
 	home, err := os.UserHomeDir()
 	if err != nil {
-		fmt.Println(err)
+		slog.Error("failed to query user's home directory", "error", err)
 		os.Exit(1)
 	}
 
