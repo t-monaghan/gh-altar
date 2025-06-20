@@ -13,6 +13,7 @@ import (
 
 	"github.com/cli/go-gh/v2"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"github.com/t-monaghan/altar/examples/pipelinewatcher"
 )
 
@@ -71,9 +72,11 @@ func sendRequest(status pipelinewatcher.PullRequestActionsStatus) error {
 
 	bufferedJSON := bytes.NewBuffer(jsonData)
 
+	address := viper.GetString("broker.address")
+
 	client := &http.Client{}
 	req, err := http.NewRequestWithContext(context.Background(),
-		http.MethodPost, BrokerAddress+"/api/pipeline-watcher", bufferedJSON)
+		http.MethodPost, address+"/api/pipeline-watcher", bufferedJSON)
 
 	if err != nil {
 		return fmt.Errorf("failed to marshal github pr status into json: %w", err)

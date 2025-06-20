@@ -1,13 +1,14 @@
 package cmd
 
 import (
+	"fmt"
+	"log/slog"
 	"os"
+	"path/filepath"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
-
-// BrokerAddress is the address of the altar broker being targeted by gh-altar.
-var BrokerAddress string
 
 // GithubToken is an optional token for providing authorisation to queries.
 var GithubToken string
@@ -33,13 +34,28 @@ func Execute() {
 }
 
 func init() {
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.gh-altar.yaml)")
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
-	rootCmd.PersistentFlags().StringVarP(&BrokerAddress, "broker-address",
-		"a", "http://127.0.0.1:25827", "IP Address of your altar broker admin server")
-	rootCmd.PersistentFlags().StringVar(&GithubToken, "token", "", "github auth token")
+	cobra.OnInitialize(initConfig)
+}
+
+func initConfig() {
+	home, err := os.UserHomeDir()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	viper.AddConfigPath(filepath.Join(home, ".config", "altar"))
+	viper.AddConfigPath(filepath.Join(home, ".config"))
+	viper.AddConfigPath(".")
+	viper.SetConfigName("altar")
+	viper.SetConfigType("yaml")
+
+	if err := viper.ReadInConfig(); err != nil {
+		slog.Error("could not read config", "error", err)
+		os.Exit(1)
+	}
+
+	if a := viper.GetString("broker.address"); a == "" {
+		slog.Error("could not find configured value for the altar broker address")
+	}
 }
