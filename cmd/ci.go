@@ -76,7 +76,7 @@ func sendRequest(status pipelinewatcher.PullRequestActionsStatus) error {
 
 	client := &http.Client{}
 	req, err := http.NewRequestWithContext(context.Background(),
-		http.MethodPost, address+"/api/pipeline-watcher", bufferedJSON)
+		http.MethodPost, "http://"+address+"/api/pipeline-watcher", bufferedJSON)
 
 	if err != nil {
 		return fmt.Errorf("failed to marshal github pr status into json: %w", err)

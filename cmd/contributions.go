@@ -111,7 +111,7 @@ func postToAltar(contributions []int) error {
 
 	client := &http.Client{}
 	req, err := http.NewRequestWithContext(context.Background(),
-		http.MethodPost, address+"/api/contributions", bufferedJSON)
+		http.MethodPost, "http://"+address+"/api/contributions", bufferedJSON)
 
 	if err != nil {
 		return fmt.Errorf("failed to marshal list of ints as json: %w", err)
