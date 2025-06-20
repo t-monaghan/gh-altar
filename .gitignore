@@ -1,3 +1,6 @@
 gh-altar
 # Added by goreleaser init:
 dist/
+
+# development configuration file
+altar.yaml

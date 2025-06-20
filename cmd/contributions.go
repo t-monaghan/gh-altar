@@ -13,6 +13,7 @@ import (
 	"github.com/cli/go-gh/v2/pkg/api"
 	"github.com/shurcooL/graphql"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 func init() {
@@ -106,9 +107,11 @@ func postToAltar(contributions []int) error {
 
 	bufferedJSON := bytes.NewBuffer(jsonData)
 
+	address := viper.GetString("broker.address")
+
 	client := &http.Client{}
 	req, err := http.NewRequestWithContext(context.Background(),
-		http.MethodPost, BrokerAddress+"/api/contributions", bufferedJSON)
+		http.MethodPost, "http://"+address+"/api/contributions", bufferedJSON)
 
 	if err != nil {
 		return fmt.Errorf("failed to marshal list of ints as json: %w", err)
