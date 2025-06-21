@@ -7,7 +7,7 @@ require (
 	github.com/shurcooL/graphql v0.0.0-20230722043721-ed46e5a46466
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/viper v1.20.1
-	github.com/t-monaghan/altar v0.0.2-0.20250613070638-d64a707f1021
+	github.com/t-monaghan/altar v0.2.0
 )
 
 require (
