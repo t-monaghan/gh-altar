@@ -1,16 +1,13 @@
 package cmd
 
 import (
+	"fmt"
 	"log/slog"
 	"os"
 	"path/filepath"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-)
-
-var (
-	version = "development"
 )
 
 // GithubToken is an optional token for providing authorisation to queries.
@@ -22,7 +19,6 @@ var rootCmd = &cobra.Command{
 	Short: "a github cli extension for usage with altar brokers",
 	Long: `gh-altar is a tool for pushing github related information to your awtrix device via an altar broker.
 e.g. "gh altar ci" will watch the actions for the PR on the branch you are currently cd'd into.`,
-	Version: version,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
@@ -30,7 +26,9 @@ e.g. "gh altar ci" will watch the actions for the PR on the branch you are curre
 
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
-func Execute() {
+func Execute(version string, commit string) {
+	rootCmd.Version = fmt.Sprintf("%v@%v", version, commit)
+
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
