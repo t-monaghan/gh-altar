@@ -5,6 +5,11 @@ import (
 	"github.com/t-monaghan/gh-altar/cmd"
 )
 
+var (
+	version = "dev"
+	commit  = "none"
+)
+
 func main() {
-	cmd.Execute()
+	cmd.Execute(version, commit)
 }
