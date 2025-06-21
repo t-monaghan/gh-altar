@@ -14,7 +14,7 @@ import (
 	"github.com/cli/go-gh/v2"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/t-monaghan/altar/examples/pipelinewatcher"
+	"github.com/t-monaghan/altar/examples/github/checks"
 )
 
 const loopDelay = time.Second * 5
@@ -45,7 +45,7 @@ func ci(_ *cobra.Command, _ []string) {
 		}
 
 		totalActions, completedActions, failedActions = getCheckInfo(response)
-		status := pipelinewatcher.PullRequestActionsStatus{
+		status := checks.Progress{
 			CompletedActions: completedActions,
 			TotalActions:     totalActions,
 			FailedActions:    failedActions,
@@ -64,7 +64,7 @@ func ci(_ *cobra.Command, _ []string) {
 	slog.Info("checks complete")
 }
 
-func sendRequest(status pipelinewatcher.PullRequestActionsStatus) error {
+func sendRequest(status checks.Progress) error {
 	jsonData, err := json.Marshal(status)
 	if err != nil {
 		return fmt.Errorf("failed to marshal json data into PullRequestActionStatus: %w", err)
