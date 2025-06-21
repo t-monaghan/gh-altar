@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/t-monaghan/gh-altar/compare/v1.2.0...v1.2.1) (2025-06-21)
+
+
+### Bug Fixes
+
+* fixes version flag ([#16](https://github.com/t-monaghan/gh-altar/issues/16)) ([5cd3963](https://github.com/t-monaghan/gh-altar/commit/5cd39639afb3b0821d65c6a25f96fceaaf0fb676))
+
 ## [1.2.0](https://github.com/t-monaghan/gh-altar/compare/v1.1.1...v1.2.0) (2025-06-20)
 
 
