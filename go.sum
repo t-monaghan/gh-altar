@@ -83,6 +83,10 @@ github.com/t-monaghan/altar v0.0.2-0.20250613070638-d64a707f1021 h1:VKkOQZhyhKOI
 github.com/t-monaghan/altar v0.0.2-0.20250613070638-d64a707f1021/go.mod h1:QNx8RaXeyjXIKB29mESZmT2ordwo8MrRliT/7qUmu9Q=
 github.com/t-monaghan/altar v0.2.0 h1:GEfHsjo2zmPHdYMfaKUUc+t1Ea4g7MjZpXPIlnzwXuk=
 github.com/t-monaghan/altar v0.2.0/go.mod h1:zJJdvXGAnjM2g9pqoSlCKG5+RII/wxvyYQhzys2XNbo=
+github.com/t-monaghan/altar v0.2.1 h1:TE9O03v4iVEcTtgBnIRAA9oIloq8GbgVVsfSDT41dlQ=
+github.com/t-monaghan/altar v0.2.1/go.mod h1:zJJdvXGAnjM2g9pqoSlCKG5+RII/wxvyYQhzys2XNbo=
+github.com/t-monaghan/altar v1.0.0-pre h1:8Sa70BoqdJ4mbC+FEocGFHpTzBUbVwNdf/JOsKuHdnw=
+github.com/t-monaghan/altar v1.0.0-pre/go.mod h1:zJJdvXGAnjM2g9pqoSlCKG5+RII/wxvyYQhzys2XNbo=
 github.com/thlib/go-timezone-local v0.0.0-20210907160436-ef149e42d28e h1:BuzhfgfWQbX0dWzYzT1zsORLnHRv3bcRcsaUk0VmXA8=
 github.com/thlib/go-timezone-local v0.0.0-20210907160436-ef149e42d28e/go.mod h1:/Tnicc6m/lsJE0irFMA0LfIwTBo4QP7A8IfyIv4zZKI=
 github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e h1:JVG44RsyaB9T2KIHavMF/ppJZNG9ZpyihvCd0w101no=
