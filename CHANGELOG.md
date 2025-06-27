@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.3](https://github.com/t-monaghan/gh-altar/compare/v1.2.2...v1.2.3) (2025-06-27)
+
+
+### Bug Fixes
+
+* github checks command only posts updates ([#22](https://github.com/t-monaghan/gh-altar/issues/22)) ([620b737](https://github.com/t-monaghan/gh-altar/commit/620b7379fa812a105d018f2b3fc2950e3dcc4c4a))
+
 ## [1.2.2](https://github.com/t-monaghan/gh-altar/compare/v1.2.1...v1.2.2) (2025-06-21)
 
 
