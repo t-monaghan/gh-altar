@@ -17,7 +17,7 @@ import (
 	"github.com/t-monaghan/altar/examples/github/checks"
 )
 
-const loopDelay = time.Second * 5
+const loopDelay = time.Second
 
 func init() {
 	rootCmd.AddCommand(ciCmd)
@@ -29,6 +29,8 @@ var ciCmd = &cobra.Command{
 	Aliases: []string{"ci", "checks"},
 	Run:     ci,
 }
+
+var lastMsg checks.Progress
 
 func ci(_ *cobra.Command, _ []string) {
 	var failedActions []string
@@ -51,11 +53,15 @@ func ci(_ *cobra.Command, _ []string) {
 			FailedActions:    failedActions,
 		}
 
-		err = sendRequest(status)
-		if err != nil {
-			slog.Error("error sending request to altar admin", "error", err)
+		if status.CompletedActions != lastMsg.CompletedActions || len(status.FailedActions) != len(lastMsg.FailedActions) {
+			err = sendRequest(status)
+			if err != nil {
+				slog.Error("error sending request to altar admin", "error", err)
 
-			return
+				return
+			}
+
+			lastMsg = status
 		}
 
 		time.Sleep(loopDelay)
@@ -67,7 +73,7 @@ func ci(_ *cobra.Command, _ []string) {
 func sendRequest(status checks.Progress) error {
 	jsonData, err := json.Marshal(status)
 	if err != nil {
-		return fmt.Errorf("failed to marshal json data into PullRequestActionStatus: %w", err)
+		return fmt.Errorf("failed to marshal json data from checks.Progress: %w", err)
 	}
 
 	bufferedJSON := bytes.NewBuffer(jsonData)
@@ -79,7 +85,7 @@ func sendRequest(status checks.Progress) error {
 		http.MethodPost, "http://"+address+"/api/pipeline-watcher", bufferedJSON)
 
 	if err != nil {
-		return fmt.Errorf("failed to marshal github pr status into json: %w", err)
+		return fmt.Errorf("failed to create request for altar's github checks: %w", err)
 	}
 
 	resp, err := client.Do(req)
