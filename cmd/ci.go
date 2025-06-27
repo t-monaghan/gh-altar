@@ -73,7 +73,7 @@ func ci(_ *cobra.Command, _ []string) {
 func sendRequest(status checks.Progress) error {
 	jsonData, err := json.Marshal(status)
 	if err != nil {
-		return fmt.Errorf("failed to marshal json data into PullRequestActionStatus: %w", err)
+		return fmt.Errorf("failed to marshal json data from checks.Progress: %w", err)
 	}
 
 	bufferedJSON := bytes.NewBuffer(jsonData)
@@ -85,7 +85,7 @@ func sendRequest(status checks.Progress) error {
 		http.MethodPost, "http://"+address+"/api/pipeline-watcher", bufferedJSON)
 
 	if err != nil {
-		return fmt.Errorf("failed to marshal github pr status into json: %w", err)
+		return fmt.Errorf("failed to create request for altar's github checks: %w", err)
 	}
 
 	resp, err := client.Do(req)
