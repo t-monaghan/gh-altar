@@ -102,7 +102,7 @@ func extractRawContributionCounts(response graphQlQuery) []int {
 func postToAltar(contributions []int) error {
 	jsonData, err := json.Marshal(contributions)
 	if err != nil {
-		return fmt.Errorf("failed to marshal json data into PullRequestActionStatus: %w", err)
+		return fmt.Errorf("failed to marshal json data from checks.Progress: %w", err)
 	}
 
 	bufferedJSON := bytes.NewBuffer(jsonData)
@@ -114,7 +114,7 @@ func postToAltar(contributions []int) error {
 		http.MethodPost, "http://"+address+"/api/contributions", bufferedJSON)
 
 	if err != nil {
-		return fmt.Errorf("failed to marshal list of ints as json: %w", err)
+		return fmt.Errorf("failed to create new request for sending github contributions: %w", err)
 	}
 
 	resp, err := client.Do(req)
