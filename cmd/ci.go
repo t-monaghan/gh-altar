@@ -17,7 +17,7 @@ import (
 	"github.com/t-monaghan/altar/examples/github/checks"
 )
 
-const loopDelay = time.Second * 5
+const loopDelay = time.Second
 
 func init() {
 	rootCmd.AddCommand(ciCmd)
@@ -29,6 +29,8 @@ var ciCmd = &cobra.Command{
 	Aliases: []string{"ci", "checks"},
 	Run:     ci,
 }
+
+var lastMsg checks.Progress
 
 func ci(_ *cobra.Command, _ []string) {
 	var failedActions []string
@@ -51,11 +53,15 @@ func ci(_ *cobra.Command, _ []string) {
 			FailedActions:    failedActions,
 		}
 
-		err = sendRequest(status)
-		if err != nil {
-			slog.Error("error sending request to altar admin", "error", err)
+		if status.CompletedActions != lastMsg.CompletedActions || len(status.FailedActions) != len(lastMsg.FailedActions) {
+			err = sendRequest(status)
+			if err != nil {
+				slog.Error("error sending request to altar admin", "error", err)
 
-			return
+				return
+			}
+
+			lastMsg = status
 		}
 
 		time.Sleep(loopDelay)
