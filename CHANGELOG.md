@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.4](https://github.com/t-monaghan/gh-altar/compare/v1.2.3...v1.2.4) (2025-06-27)
+
+
+### Bug Fixes
+
+* improves error messaging ([#24](https://github.com/t-monaghan/gh-altar/issues/24)) ([5fd3d81](https://github.com/t-monaghan/gh-altar/commit/5fd3d81e023778862fe9e233b6d60897bc5dbd0a))
+
 ## [1.2.3](https://github.com/t-monaghan/gh-altar/compare/v1.2.2...v1.2.3) (2025-06-27)
 
 
