@@ -18,6 +18,7 @@ import (
 
 func init() {
 	rootCmd.AddCommand(contribCmd)
+	contribCmd.Flags().StringVar(&GithubToken, "token", "", "github auth token")
 }
 
 var contribCmd = &cobra.Command{

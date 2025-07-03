@@ -60,6 +60,4 @@ func initConfig() {
 	if a := viper.GetString("broker.address"); a == "" {
 		slog.Error("could not find configured value for the altar broker address")
 	}
-
-	rootCmd.PersistentFlags().StringVar(&GithubToken, "token", "", "github auth token")
 }
