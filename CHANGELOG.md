@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.5](https://github.com/t-monaghan/gh-altar/compare/v1.2.4...v1.2.5) (2025-07-06)
+
+
+### Bug Fixes
+
+* github token flag for contributions ([#26](https://github.com/t-monaghan/gh-altar/issues/26)) ([45079a0](https://github.com/t-monaghan/gh-altar/commit/45079a02f287102e815ebb6c88cc20198d206078))
+
 ## [1.2.4](https://github.com/t-monaghan/gh-altar/compare/v1.2.3...v1.2.4) (2025-06-27)
 
 
