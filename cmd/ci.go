@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"log/slog"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/cli/go-gh/v2"
@@ -17,7 +18,9 @@ import (
 	"github.com/t-monaghan/altar/examples/github/checks"
 )
 
-const loopDelay = time.Second
+const (
+	loopDelay = time.Second
+)
 
 func init() {
 	rootCmd.AddCommand(ciCmd)
@@ -40,7 +43,11 @@ func ci(_ *cobra.Command, _ []string) {
 
 	for completedActions != totalActions {
 		response, err := queryGH()
-		if err != nil {
+		if err != nil && strings.Contains(err.Error(), "no pull requests found for branch") {
+			slog.Warn("could not find a pull request for this branch")
+
+			return
+		} else if err != nil {
 			slog.Error("failed to query github", "error", err)
 
 			return
