@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.6](https://github.com/t-monaghan/gh-altar/compare/v1.2.5...v1.2.6) (2025-07-26)
+
+
+### Bug Fixes
+
+* improves error message for pr not found ([#28](https://github.com/t-monaghan/gh-altar/issues/28)) ([c9ed19b](https://github.com/t-monaghan/gh-altar/commit/c9ed19bdd662f48f7033de32f56ed7508eff2086))
+
 ## [1.2.5](https://github.com/t-monaghan/gh-altar/compare/v1.2.4...v1.2.5) (2025-07-06)
 
 
