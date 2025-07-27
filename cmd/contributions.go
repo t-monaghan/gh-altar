@@ -28,13 +28,14 @@ var contribCmd = &cobra.Command{
 	Run:     grid,
 }
 
-type graphQlQuery struct {
+type contributionsQuery struct {
 	User struct {
 		ContributionsCollection struct {
 			ContributionCalendar struct {
 				Weeks []struct {
 					ContributionDays []struct {
 						ContributionCount int
+						Color             string
 						Date              string
 					}
 				}
@@ -71,14 +72,15 @@ func grid(_ *cobra.Command, _ []string) {
 		"userName": graphql.String(strings.TrimSpace(userName.String())),
 	}
 
-	var query graphQlQuery
+	var query contributionsQuery
 	err = client.Query("foobarbaz", &query, variables)
 
 	if err != nil {
 		slog.Error("failed to create query for contributions", "error", err)
 	}
 
-	err = postToAltar(extractRawContributionCounts(query))
+	// err = postToAltar(extractRawContributionCounts(query))
+	err = postToAltar(extractContributionColours(query))
 	if err != nil {
 		slog.Error("error posting contribution counts to altar", "error", err)
 
@@ -88,7 +90,19 @@ func grid(_ *cobra.Command, _ []string) {
 	slog.Info("successfully posted grid to altar")
 }
 
-func extractRawContributionCounts(response graphQlQuery) []int {
+func extractContributionColours(response contributionsQuery) []string {
+	colours := []string{}
+
+	for _, week := range response.User.ContributionsCollection.ContributionCalendar.Weeks {
+		for _, day := range week.ContributionDays {
+			colours = append(colours, day.Color)
+		}
+	}
+
+	return colours
+}
+
+func extractRawContributionCounts(response contributionsQuery) []int {
 	rawCount := []int{}
 
 	for _, week := range response.User.ContributionsCollection.ContributionCalendar.Weeks {
@@ -100,7 +114,7 @@ func extractRawContributionCounts(response graphQlQuery) []int {
 	return rawCount
 }
 
-func postToAltar(contributions []int) error {
+func postToAltar(contributions []string) error {
 	jsonData, err := json.Marshal(contributions)
 	if err != nil {
 		return fmt.Errorf("failed to marshal json data from checks.Progress: %w", err)
